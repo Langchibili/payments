@@ -21,7 +21,7 @@ export default class AirtelMoney extends React.Component {
     if (window.LencoPay) { // Check if LencoPay is loaded
       LencoPay.getPaid({
         key: apiKey, // your Lenco public key
-        reference: reference === "unset"? "ref-": reference +"N"+Date.now(), // a unique reference you generated
+        reference: reference === "unset"? "ref-"+"N"+ Date.now(): reference +"N"+ Date.now(), // a unique reference you generated
         email: email == "unset"? "langtechdev@gmail.com" : email, // the customer's email address
         amount: parseInt(amount), // the amount the customer is to pay
         currency: "ZMW",
