@@ -3,8 +3,9 @@
 import { useSearchParams } from 'next/navigation'
 import Home from '@/components/views/Home'
 import Loader from '@/components/includes/Loader'
+import { Suspense } from 'react'
 
-export default function App() {
+function AppContent() {
   const searchParams = useSearchParams()
   
   // Extract query parameters
@@ -16,7 +17,7 @@ export default function App() {
   const chargeCustomer = searchParams.get('chargeCustomer')
 
   // Check if any required parameter is missing or invalid
-  const requiredParams = [amount, redirectUrl, webhookUrl, email, reference,chargeCustomer]
+  const requiredParams = [amount, redirectUrl, webhookUrl, email, reference, chargeCustomer]
   const areParamsValid = requiredParams.every(param => param !== null && param !== undefined && param !== '' && (param !== '0' && !isNaN(Number(param)) ? Number(param) > 0 : true))
 
   // Return Loader if parameters are invalid or loading
@@ -30,3 +31,10 @@ export default function App() {
   return <Home query={query} />
 }
 
+export default function App() {
+  return (
+    <Suspense fallback={<Loader color="secondary" />}>
+      <AppContent />
+    </Suspense>
+  )
+}
