@@ -31,3 +31,9 @@ body {
     text-wrap: balance;
   }
 }
+.center-container {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  height: 100vh; /* Full viewport height */
+}
