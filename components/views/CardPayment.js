@@ -1,14 +1,14 @@
 'use client'
 
-import { apiKey, sendWebHookRequest } from "@/Constants"
+import { sendWebHookRequest, getApiKey } from "@/Constants"
 import React from "react"
 
 export default class CardPayment extends React.Component {
 
-  getPaidWithLenco = (amount,email,reference,redirectUrl,webhookUrl,chargeCustomer)=> {
+  getPaidWithLenco = (amount,email,reference,redirectUrl,webhookUrl,site,chargeCustomer)=> {
     if (window.LencoPay) { // Check if LencoPay is loaded
       LencoPay.getPaid({
-        key: apiKey, // your Lenco public key
+        key: getApiKey(site), // your Lenco public key
         reference: reference === "unset"? "ref-"+"N"+ Date.now(): reference +"N"+ Date.now(), // a unique reference you generated
         email: email == "unset"? "langtechdev@gmail.com" : email, // the customer's email address
         amount: parseInt(amount), // the amount the customer is to pay
@@ -18,7 +18,7 @@ export default class CardPayment extends React.Component {
         onSuccess: function (response) {
           // This happens after the payment is completed successfully
           if(webhookUrl === "unset"){
-             window.location = redirectUrl // redirect user then
+             window.location = redirectUrl.replace(/\$/g, '&') // redirect user then
           } 
           else{
              sendWebHookRequest(webhookUrl,response)
@@ -38,7 +38,7 @@ export default class CardPayment extends React.Component {
 
 
   render() {
-    const { amount,email,reference,redirectUrl,webhookUrl,chargeCustomer } = this.props.query
-    return this.getPaidWithLenco(amount,email,reference,redirectUrl,webhookUrl,chargeCustomer)
+    const { amount,email,reference,redirectUrl,webhookUrl,site,chargeCustomer } = this.props.query
+    return this.getPaidWithLenco(amount,email,reference,redirectUrl,webhookUrl,site,chargeCustomer)
   }
 }

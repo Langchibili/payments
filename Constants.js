@@ -1,7 +1,13 @@
-import { publicKey } from "./secrets"
+import { DriverbasePublicKey, OkraMallPublicKey } from "./secrets"
 
-export const apiKey = publicKey
-
+export const getApiKey = (site)=>{
+    if(site === "driverbase"){
+        return DriverbasePublicKey
+    }
+    else{
+        return OkraMallPublicKey
+    }
+}
 export const returnNineDigitNumber = (phoneNumber) =>{
     // Remove any non-digit characters
     let normalizedNumber = phoneNumber.replace(/\D/g, '')

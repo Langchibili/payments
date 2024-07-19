@@ -14,10 +14,11 @@ function AppContent() {
   const webhookUrl = searchParams.get('webhook')
   const email = searchParams.get('email')
   const reference = searchParams.get('reference')
+  const site = searchParams.get('site')
   const chargeCustomer = searchParams.get('chargeCustomer')
 
   // Check if any required parameter is missing or invalid
-  const requiredParams = [amount, redirectUrl, webhookUrl, email, reference, chargeCustomer]
+  const requiredParams = [amount, redirectUrl, webhookUrl, email, reference, site, chargeCustomer]
   const areParamsValid = requiredParams.every(param => param !== null && param !== undefined && param !== '' && (param !== '0' && !isNaN(Number(param)) ? Number(param) > 0 : true))
 
   // Return Loader if parameters are invalid or loading
@@ -26,7 +27,7 @@ function AppContent() {
   }
 
   // Pass query parameters as props to Home component
-  const query = { amount, redirectUrl, webhookUrl, email, reference, chargeCustomer}
+  const query = { amount, redirectUrl, webhookUrl, email, reference, site, chargeCustomer}
   
   return <Home query={query} />
 }

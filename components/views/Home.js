@@ -13,7 +13,7 @@ export default class Home extends React.Component {
      }
   }
 
-
+  
   renderPaymentMethod = ()=>{
      const { amount } = this.props.query
      const isAmountInvalid = parseInt(amount) === 0 || amount === null || amount === undefined || parseInt(amount) < 0
@@ -21,7 +21,8 @@ export default class Home extends React.Component {
 
      if(this.state.selectedPaymentMethod === null) {
         return (<div className="container">
-          <h2 className="my-4">Select Payment Method</h2>
+          <h1>OkraPay</h1>
+          <h3 className="my-4">Select Payment Method</h3><hr/>
             <div 
               style={{backgroundColor: "#f7f7f7",fontWeight:500}}
               className="btn mb-2 btn-outline-secondary d-inline-block align-items-center" 
@@ -36,7 +37,7 @@ export default class Home extends React.Component {
               className="btn mb-2 btn-outline-secondary d-inline-block align-items-center" 
               onClick={() => { this.setState({ selectedPaymentMethod: "MtnMoney" }); }}
             >
-              <img src="/New-mtn-logo.jpg" alt="MTN Money" className="img-fluid me-2" style={{ maxHeight: '50px' }} />
+              <img src="/mtn-momo-logo-mobile-money-logo-png-transparent.png" alt="MTN Money" className="img-fluid me-2" style={{ maxHeight: '50px' }} />
               MTN Money
             </div>
             <br/>
